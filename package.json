@@ -1,0 +1,17 @@
+{
+  "name": "binox-solver",
+  "version": "1.0.0",
+  "description": "Solves Binox puzzles (https://krazydad.com/binox/)",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "verbose": true
+  },
+  "author": "Vaughan Hilts",
+  "license": "MIT",
+  "dependencies": {
+    "jest": "^24.5.0"
+  }
+}
