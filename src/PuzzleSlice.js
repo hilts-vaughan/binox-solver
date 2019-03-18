@@ -112,6 +112,11 @@ class PuzzleSlice {
 
       for (let index = 0; index < this.getLength(); index++) {
         const element = this.buffer[index];
+
+        if (element === 'X') {
+          continue;
+        }
+
         element === '1' ? ones++ : zeroes++;
       }
 

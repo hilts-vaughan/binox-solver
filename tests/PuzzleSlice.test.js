@@ -124,6 +124,12 @@ describe('PuzzleSlice', () => {
         const slice = PuzzleSlice.fromBinaryString(SMALL_STRING);
         expect(slice.isValidSlice()).toBe(true);
       });
+
+      it('should return true even if there is a run with Xs in it since these are allowed, since they are not yet determined', () => {
+        const SMALL_STRING_RUN_WITH_UNKNOWNS = 'XXX10'; // balanced but has a run
+        const slice = PuzzleSlice.fromBinaryString(SMALL_STRING_RUN_WITH_UNKNOWNS);
+        expect(slice.isValidSlice()).toBe(true);
+      });
     });
   });
 });
