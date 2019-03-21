@@ -1,6 +1,6 @@
 {
   "name": "binox-solver",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Solves Binox puzzles (https://krazydad.com/binox/)",
   "main": "index.js",
   "scripts": {

@@ -276,50 +276,6 @@ class PuzzleSlice {
 module.exports = PuzzleSlice;
 
 },{}],4:[function(require,module,exports){
-const Point = require('./Point');
-
-/*
-    This class is more or less responsible for just checking if a board given is correct. It can be used for validating the result
-    of the algorithim in the end. It's nothing complicated.
-*/
-class PuzzleSolutionChecker {
-  validate(board) {
-    // To check if the board is legal, simply every slice have to be legal and the set for getitng all unfilled points is empty
-    // That's it.
-
-    const remainingPointsToBeFilled = board.getIndiciePairsThatAreNotFilledIn();
-    if (remainingPointsToBeFilled.length > 0) {
-      return false;
-    }
-
-    const horizontalSlices = new Set();
-    const verticalSlices = new Set();
-    const expectedSlices = board.getLength();
-
-    for (let x = 0; x < board.getLength(); x++) {
-      for (let y = 0; y < board.getLength(); y++) {
-        const slices = board.getSlicesForPoint(new Point(x, y));
-        const areSlicesValid = slices.every(slice => slice.isValidSlice());
-
-        horizontalSlices.add(slices[0].asBinaryString());
-        verticalSlices.add(slices[1].asBinaryString());
-
-        if (!areSlicesValid) {
-          return false;
-        }
-      }
-    }
-
-    const areSlicesUnique =
-      verticalSlices.size === expectedSlices && horizontalSlices.size === expectedSlices;
-
-    return areSlicesUnique;
-  }
-}
-
-module.exports = PuzzleSolutionChecker;
-
-},{"./Point":1}],5:[function(require,module,exports){
 /**
  * This is reponsible for solving Binox puzzles of any size. Currently, it is only tested on 6x6 but it should
  * work w/ any size (to a certain extent) given the runtime computation cost.
@@ -387,21 +343,19 @@ class PuzzleSolutionSolver {
 
 module.exports = PuzzleSolutionSolver;
 
-},{}],6:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 const PuzzleSolutionSolver = require('./PuzzleSolutionSolver');
-
-// needed in order to get them all bundled together
-require('./Point');
-require('./PuzzleBoard');
-require('./PuzzleSlice');
-require('./PuzzleSolutionChecker');
+const PuzzleBoard = require('./PuzzleBoard');
 
 /**
  * This is the default export since we want to provide one to make the module easier to use.
  * You can still access the internals if you need to by loading the module and requiring files
  * in from the path of it.
  */
-module.exports = PuzzleSolutionSolver;
+module.exports = {
+  solver: PuzzleSolutionSolver,
+  board: PuzzleBoard
+};
 
-},{"./Point":1,"./PuzzleBoard":2,"./PuzzleSlice":3,"./PuzzleSolutionChecker":4,"./PuzzleSolutionSolver":5}]},{},[6])(6)
+},{"./PuzzleBoard":2,"./PuzzleSolutionSolver":4}]},{},[5])(5)
 });
